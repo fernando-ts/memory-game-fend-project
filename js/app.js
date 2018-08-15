@@ -1,15 +1,17 @@
-/*
- * Create a list that holds all of your cards 
- */
+//*** Retrieve a list of all the card elements from the DOM  
 const allCards = Array.from(document.querySelectorAll('.card'));
 console.log(allCards);
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+//*** Shuffle all the cards and display'em 
+function displayCards() {
+    const deckContainer = document.querySelector('.deck');
+    const cardsShuffled = shuffle(allCards);
+    cardsShuffled.forEach(function(element) {
+        deckContainer.appendChild (element);
+    });
+}
+displayCards();
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {

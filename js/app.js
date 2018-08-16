@@ -3,14 +3,14 @@ const allCards = Array.from(document.querySelectorAll('.card'));
 console.log(allCards);
 
 //*** Shuffle all the cards and display'em 
-function displayCards() {
+function randomDisplay() {
     const deckContainer = document.querySelector('.deck');
     const cardsShuffled = shuffle(allCards);
     cardsShuffled.forEach(function(element) {
         deckContainer.appendChild (element);
     });
 }
-displayCards();
+randomDisplay();
 
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -29,9 +29,30 @@ function shuffle(array) {
 }
 
 
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
+
+ //* set up the event listener for a card. If a card is clicked:
+ 
+let selectedCards = [];  // here I will put the 2 cards selected for comparison 
+let countClickedCards = 0;
+
+for (let card of allCards) {
+    card.addEventListener('click', function (event) {
+        countClickedCards++;
+        if (countClickedCards < 3) {
+            card.classList.add('open', 'show');
+            setTimeout(function () {
+                card.classList.remove('open', 'show');
+                countClickedCards = 0;
+            }, 2000);    
+            //selectedCards.splice(0, selectedCards.length);
+        } 
+        
+        selectedCards.push(card);
+        console.log(selectedCards);
+    })
+}
+
+ /*  - display the card's symbol (put this functionality in another function that you call from this one)
  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
  *  - if the list already has another card, check to see if the two cards match
  *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)

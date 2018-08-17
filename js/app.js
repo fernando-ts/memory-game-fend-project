@@ -33,23 +33,37 @@ function shuffle(array) {
  //* set up the event listener for a card. If a card is clicked:
  
 let selectedCards = [];  // here I will put the 2 cards selected for comparison 
+let matchedCardsLst = [];  //here the cards matched will be stored 
 let countClickedCards = 0;
 
 for (let card of allCards) {
     card.addEventListener('click', function (event) {
+        selectedCards.push(card);
         countClickedCards++;
         if (countClickedCards < 3) {
             card.classList.add('open', 'show');
             setTimeout(function () {
                 card.classList.remove('open', 'show');
                 countClickedCards = 0;
-            }, 2000);    
-            //selectedCards.splice(0, selectedCards.length);
+            }, 2000);       
         } 
-        
-        selectedCards.push(card);
+        lookForMatch();  
         console.log(selectedCards);
     })
+}
+
+//match cards function 
+function lookForMatch() {
+    if (selectedCards.length === 2) {
+        const cardA = selectedCards[0];
+        const cardB = selectedCards[1];
+        if (cardA.dataset.name === cardB.dataset.name) {
+            cardA.classList.add('match');
+            cardB.classList.add('match');
+        }
+        selectedCards.splice(0, selectedCards.length);
+        console.log("this part was fired")
+    }        
 }
 
  /*  - display the card's symbol (put this functionality in another function that you call from this one)

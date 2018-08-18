@@ -37,7 +37,7 @@ let matchedCardsLst = [];  //here the cards matched will be stored
 let countClickedCards = 0;
 
 for (let card of allCards) {
-    card.addEventListener('click', function (event) {
+    card.addEventListener('click', function showCard(){ 
         selectedCards.push(card);
         countClickedCards++;
         if (countClickedCards < 3) {
@@ -60,11 +60,20 @@ function lookForMatch() {
         if (cardA.dataset.name === cardB.dataset.name) {
             cardA.classList.add('match');
             cardB.classList.add('match');
+            console.log("this was a match");
         }
         selectedCards.splice(0, selectedCards.length);
-        console.log("this part was fired")
     }        
 }
+
+// Prevent 2 clicks in the same card function 
+
+//Restart game 
+const restartBtn = document.querySelector('.restart').firstElementChild;
+restartBtn.addEventListener('click', function () {
+    randomDisplay();
+})    
+
 
  /*  - display the card's symbol (put this functionality in another function that you call from this one)
  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)

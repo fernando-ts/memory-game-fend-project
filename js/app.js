@@ -36,20 +36,25 @@ let selectedCards = [];  // here I will put the 2 cards selected for comparison
 let matchedCardsLst = [];  //here the cards matched will be stored 
 let countClickedCards = 0;
 
+//* Add event listeners to each card's loop
 for (let card of allCards) {
-    card.addEventListener('click', function showCard(){ 
-        selectedCards.push(card);
-        countClickedCards++;
-        if (countClickedCards < 3) {
-            card.classList.add('open', 'show');
-            setTimeout(function () {
-                card.classList.remove('open', 'show');
-                countClickedCards = 0;
-            }, 2000);       
-        } 
-        lookForMatch();  
-        console.log(selectedCards);
-    })
+    card.addEventListener('click', showCard)
+}
+
+// --> Show cards function 
+function showCard() {
+    let thisItem = this;
+    selectedCards.push(thisItem);
+    countClickedCards++;
+    if (countClickedCards < 3) {
+        thisItem.classList.add('open', 'show');
+        setTimeout(function () {
+            thisItem.classList.remove('open', 'show');
+            countClickedCards = 0;
+        }, 2000);
+    }
+    console.log(selectedCards);
+    lookForMatch();
 }
 
 //match cards function 
@@ -67,6 +72,7 @@ function lookForMatch() {
 }
 
 // Prevent 2 clicks in the same card function 
+
 
 //Restart game 
 const restartBtn = document.querySelector('.restart').firstElementChild;

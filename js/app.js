@@ -44,14 +44,19 @@ for (let card of allCards) {
 // --> Show cards function 
 function showCard() {
     let thisItem = this;
-    selectedCards.push(thisItem);
-    countClickedCards++;
-    if (countClickedCards < 3) {
-        thisItem.classList.add('open', 'show');
-        setTimeout(function () {
+    if (thisItem.classList.contains('show')) {
+        selectedCards = [];
+        return        
+    } else {
+        selectedCards.push(thisItem);
+        countClickedCards++;
+        if (countClickedCards < 3) {
+            thisItem.classList.add('open', 'show');
+            setTimeout(function () {
             thisItem.classList.remove('open', 'show');
             countClickedCards = 0;
-        }, 2000);
+            }, 2000);
+        }
     }
     console.log(selectedCards);
     lookForMatch();

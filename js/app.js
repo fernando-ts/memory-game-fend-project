@@ -45,21 +45,14 @@ for (let card of allCards) {
 function showCard() {
     let thisItem = this;
     if (thisItem.classList.contains('show')) {
-        selectedCards = [];
         return        
-    } else {
+    } else if (countClickedCards < 3) {
         selectedCards.push(thisItem);
         countClickedCards++;
-        if (countClickedCards < 3) {
-            thisItem.classList.add('open', 'show');
-            setTimeout(function () {
-            thisItem.classList.remove('open', 'show');
-            countClickedCards = 0;
-            }, 2000);
-        }
+        thisItem.classList.add('open', 'show');
+        lookForMatch();
     }
     console.log(selectedCards);
-    lookForMatch();
 }
 
 //match cards function 
@@ -70,9 +63,19 @@ function lookForMatch() {
         if (cardA.dataset.name === cardB.dataset.name) {
             cardA.classList.add('match');
             cardB.classList.add('match');
+            selectedCards = [];
+            countClickedCards = 0;
             console.log("this was a match");
+        } else {
+            setTimeout(function () {
+                cardA.classList.remove('open', 'show');
+                cardB.classList.remove('open', 'show');
+            }, 2000);
+            //selectedCards = [];
+            //countClickedCards = 0;
         }
         selectedCards.splice(0, selectedCards.length);
+        countClickedCards = 0;
     }        
 }
 

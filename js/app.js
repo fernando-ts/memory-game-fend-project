@@ -77,8 +77,18 @@ function lookForMatch() {
             //countClickedCards = 0;
         }
         selectedCards.splice(0, selectedCards.length);
+        countMoves();
     }        
 }
+
+// Count moves made by user function 
+let moves = document.querySelector('.moves');
+let totalMoves = 0;
+function countMoves() {
+    totalMoves++;
+    moves.textContent = totalMoves;
+} 
+
 
 // Game completed successfully function for modal  
 function completedGame() {

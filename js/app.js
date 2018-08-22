@@ -63,23 +63,29 @@ function lookForMatch() {
         if (cardA.dataset.name === cardB.dataset.name) {
             cardA.classList.add('match');
             cardB.classList.add('match');
-            selectedCards = [];
+            matchedCardsLst.push(selectedCards.splice(0, selectedCards.length));
             countClickedCards = 0;
             console.log("this was a match");
+            completedGame();
         } else {
             setTimeout(function () {
                 cardA.classList.remove('open', 'show');
                 cardB.classList.remove('open', 'show');
-            }, 2000);
+                countClickedCards = 0;
+            }, 1000);
             //selectedCards = [];
             //countClickedCards = 0;
         }
         selectedCards.splice(0, selectedCards.length);
-        countClickedCards = 0;
     }        
 }
 
-// Prevent 2 clicks in the same card function 
+// Game completed successfully function 
+function completedGame() {
+    if (matchedCardsLst.length ===8) {
+        document.querySelector('.end-modal').style.display = 'flex';
+    }
+}
 
 
 //Restart game 

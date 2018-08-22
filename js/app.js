@@ -81,14 +81,24 @@ function lookForMatch() {
     }        
 }
 
-// Count moves made by user function 
+// Function: count moves made by user
 let moves = document.querySelector('.moves');
 let totalMoves = 0;
 function countMoves() {
     totalMoves++;
     moves.textContent = totalMoves;
+    performanceRating();
 } 
 
+//  Function: to rate the performance of player 
+const allStars = Array.from(document.querySelectorAll('.fa-star'));
+function performanceRating() {
+    if (totalMoves > 9 && totalMoves < 14 ) {
+        allStars[2].classList.add('star-down');
+    } else if (totalMoves >= 14) {
+        allStars[1].classList.add('star-down');
+    }
+}
 
 // Game completed successfully function for modal  
 function completedGame() {

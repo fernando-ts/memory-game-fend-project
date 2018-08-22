@@ -80,19 +80,24 @@ function lookForMatch() {
     }        
 }
 
-// Game completed successfully function 
+// Game completed successfully function for modal  
 function completedGame() {
     if (matchedCardsLst.length ===8) {
         document.querySelector('.end-modal').style.display = 'flex';
     }
 }
 
+// Close the modal function 
+const close = document.querySelector('.close');
+close.addEventListener('click', function () {
+    document.querySelector('.end-modal').style.display = 'none';   
+});
 
 //Restart game 
 const restartBtn = document.querySelector('.restart').firstElementChild;
 restartBtn.addEventListener('click', function () {
     randomDisplay();
-})    
+});    
 
 
  /*  - display the card's symbol (put this functionality in another function that you call from this one)

@@ -121,7 +121,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* display: none; */
+    display: none;
  }
 
  .mod-content {

@@ -58,6 +58,7 @@ function showCard() {
 //match cards function 
 function lookForMatch() {
     if (selectedCards.length === 2) {
+        countMoves();
         const cardA = selectedCards[0];
         const cardB = selectedCards[1];
         if (cardA.dataset.name === cardB.dataset.name) {
@@ -74,8 +75,7 @@ function lookForMatch() {
                 countClickedCards = 0;
             }, 1000);
         }
-        selectedCards = [];
-        countMoves();
+        selectedCards = []; 
     }        
 }
 
@@ -119,7 +119,12 @@ function performanceRating() {
 
 // Game completed successfully function for modal  
 function completedGame() {
-    if (matchedCardsLst.length ===8) {
+    const finalRating = document.querySelector('.stars').innerHTML;
+    if (matchedCardsLst.length === 8) {
+        clearInterval(timePeriod);
+        document.getElementById('total-moves').textContent = totalMoves;
+        document.getElementById('total-time').textContent = timerElmnt.textContent;
+        document.getElementById('rating-star').innerHTML = finalRating;
         document.querySelector('.end-modal').style.display = 'flex';
     }
 }

@@ -73,10 +73,8 @@ function lookForMatch() {
                 cardB.classList.remove('open', 'show');
                 countClickedCards = 0;
             }, 1000);
-            //selectedCards = [];
-            //countClickedCards = 0;
         }
-        selectedCards.splice(0, selectedCards.length);
+        selectedCards = [];
         countMoves();
     }        
 }
@@ -87,10 +85,29 @@ let totalMoves = 0;
 function countMoves() {
     totalMoves++;
     moves.textContent = totalMoves;
+    if (totalMoves ===1) {
+        startTimer();
+    }
     performanceRating();
 } 
 
-//  Function: to rate the performance of player 
+// Function: sets a timer for the game
+const timerElmnt = document.querySelector('.timer');
+let timePeriod;
+let seconds = 0;
+let minutes = 0;
+function startTimer() {
+    timePeriod = setInterval(function () {
+        timerElmnt.innerHTML = `${minutes} minute(s) ${seconds} seconds`; 
+        seconds++;
+        if (seconds === 60) {     
+            minutes++;
+            seconds = 0;
+        }
+    }, 1000);
+}
+
+//  Function: rates the performance of player 
 const allStars = Array.from(document.querySelectorAll('.fa-star'));
 function performanceRating() {
     if (totalMoves > 9 && totalMoves < 14 ) {

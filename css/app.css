@@ -186,3 +186,34 @@ h1 {
     box-shadow: 0 2px #d54600;
     top: 2px; 
 }
+
+/*
+ *  --> Styles for Media Queries 
+ */
+
+@media (max-width: 767px) {
+	.deck {
+		width: 85%;
+		min-height: 610px;
+	}
+
+	.deck .card {
+		height: 5.5rem;
+		width: 5.5rem;
+	}
+
+	.mod-content {
+		width: 450px;
+	}
+}
+
+@media (max-width: 500px) {
+	.deck {
+        min-height: 415px;
+	}
+
+	.deck .card {
+		height: 4.3rem;
+		width: 4.3rem;
+	}
+}

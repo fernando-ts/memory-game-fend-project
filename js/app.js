@@ -1,16 +1,16 @@
-//*** Retrieve a list of all the card elements from the DOM  
+//--> Retrieve a list of all the card elements from the DOM  
 const allCards = Array.from(document.querySelectorAll('.card'));
-console.log(allCards);
 
-//*** Shuffle all the cards and display'em 
-function randomDisplay() {
+//--> Shuffle all the cards and display'em 
+let randomDisplay;
+(randomDisplay = function() {
     const deckContainer = document.querySelector('.deck');
     const cardsShuffled = shuffle(allCards);
-    cardsShuffled.forEach(function(element) {
-        deckContainer.appendChild (element);
+    cardsShuffled.forEach(function (element) {
+        deckContainer.appendChild(element);
+        element.classList.remove('open', 'show', 'match');
     });
-}
-randomDisplay();
+})();
 
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -28,12 +28,9 @@ function shuffle(array) {
     return array;
 }
 
-
-
- //* set up the event listener for a card. If a card is clicked:
  
-let selectedCards = [];  // here I will put the 2 cards selected for comparison 
-let matchedCardsLst = [];  //here the cards matched will be stored 
+let selectedCards = [];  
+let matchedCardsLst = [];   
 let countClickedCards = 0;
 
 //* Add event listeners to each card's loop
@@ -137,16 +134,18 @@ close.addEventListener('click', function () {
 
 //Restart game 
 const restartBtn = document.querySelector('.restart').firstElementChild;
-restartBtn.addEventListener('click', function () {
+const playAgain = document.getElementById('new-game');
+function restartGame() {
+    clearInterval(timePeriod);
+    totalMoves = 0;
+    seconds = 0;
+    minutes = 0;
+    matchedCardsLst = [];
+    moves.textContent = totalMoves;
+    timerElmnt.textContent = '';
+    allStars[2].classList.remove('star-down');
+    allStars[1].classList.remove('star-down');
     randomDisplay();
-});    
+}
 
-
- /*  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
+restartBtn.addEventListener('click', restartGame);

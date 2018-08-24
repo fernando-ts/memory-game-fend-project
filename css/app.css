@@ -43,7 +43,7 @@ h1 {
 
 .timer {
     display: inline;
-    margin: 0 10px 0 17px;
+    margin: 0 10px 0 15px;
 }
 
 /*
@@ -145,7 +145,7 @@ h1 {
 }
 
 .mod-content {
-    width: 500px;
+    width: 550px;
     height: 350px;
     background: linear-gradient(160deg, #c9e5e7 0%, #02ccba 100%);
     border-radius: 5px;

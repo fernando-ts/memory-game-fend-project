@@ -33,7 +33,7 @@ let selectedCards = [];
 let matchedCardsLst = [];   
 let countClickedCards = 0;
 
-//* Add event listeners to each card's loop
+//--> Add event listeners to each card's loop
 for (let card of allCards) {
     card.addEventListener('click', showCard)
 }
@@ -49,10 +49,9 @@ function showCard() {
         thisItem.classList.add('open', 'show');
         lookForMatch();
     }
-    console.log(selectedCards);
 }
 
-//match cards function 
+//--> Match cards function
 function lookForMatch() {
     if (selectedCards.length === 2) {
         countMoves();
@@ -63,7 +62,6 @@ function lookForMatch() {
             cardB.classList.add('match');
             matchedCardsLst.push(selectedCards.splice(0, selectedCards.length));
             countClickedCards = 0;
-            console.log("this was a match");
             completedGame();
         } else {
             setTimeout(function () {
@@ -76,7 +74,7 @@ function lookForMatch() {
     }        
 }
 
-// Function: count moves made by user
+//--> Function: count moves made by user
 let moves = document.querySelector('.moves');
 let totalMoves = 0;
 function countMoves() {
@@ -88,7 +86,7 @@ function countMoves() {
     performanceRating();
 } 
 
-// Function: sets a timer for the game
+//--> Function: sets a timer for the game
 const timerElmnt = document.querySelector('.timer');
 let timePeriod;
 let seconds = 0;
@@ -104,7 +102,7 @@ function startTimer() {
     }, 1000);
 }
 
-//  Function: rates the performance of player 
+//--> Function: rates the performance of player
 const allStars = Array.from(document.querySelectorAll('.fa-star'));
 function performanceRating() {
     if (totalMoves > 9 && totalMoves < 14 ) {
@@ -114,7 +112,7 @@ function performanceRating() {
     }
 }
 
-// Game completed successfully function for modal  
+//--> Game completed successfully function for modal
 function completedGame() {
     const finalRating = document.querySelector('.stars').innerHTML;
     if (matchedCardsLst.length === 8) {
@@ -126,13 +124,13 @@ function completedGame() {
     }
 }
 
-// Close the modal function 
+//--> Close the modal function
 const close = document.querySelector('.close');
 close.addEventListener('click', function () {
     document.querySelector('.end-modal').style.display = 'none';   
 });
 
-//Restart game 
+//--> Restart game
 const restartBtn = document.querySelector('.restart').firstElementChild;
 function restartGame() {
     clearInterval(timePeriod);

@@ -134,7 +134,6 @@ close.addEventListener('click', function () {
 
 //Restart game 
 const restartBtn = document.querySelector('.restart').firstElementChild;
-const playAgain = document.getElementById('new-game');
 function restartGame() {
     clearInterval(timePeriod);
     totalMoves = 0;
@@ -149,3 +148,10 @@ function restartGame() {
 }
 
 restartBtn.addEventListener('click', restartGame);
+
+// --> Function: after successfully finished, play again
+const playAgain = document.getElementById('new-game');
+playAgain.addEventListener('click', function () {
+    restartGame();
+    document.querySelector('.end-modal').style.display = 'none';
+});

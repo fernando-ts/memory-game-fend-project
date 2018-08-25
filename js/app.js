@@ -1,5 +1,32 @@
 //--> Retrieve a list of all the card elements from the DOM  
 const allCards = Array.from(document.querySelectorAll('.card'));
+//--> Stores the selected cards for comparison 
+let selectedCards = []; 
+//--> Stores all the cards that match
+let matchedCardsLst = [];
+//--> Counts how many cards have been clicked 
+let countClickedCards = 0;
+//--> Selects the element where moves will be displayed
+let moves = document.querySelector('.moves');
+//--> Stores the moves made by user
+let totalMoves = 0;
+//--> Selects the element where the time will be displayed
+const timerElmnt = document.querySelector('.timer');
+//--> Stores the time from interval
+let seconds = 0;
+let minutes = 0;
+//--> The setInterval is assigned to this variable to access it in clearInterval 
+let timePeriod;
+//--> Selects all the stars from the DOM 
+const allStars = Array.from(document.querySelectorAll('.fa-star'));
+//--> Selects the close sign from the modal 
+const close = document.querySelector('.close');
+//--> Selects the restart sign from the DOM 
+const restartBtn = document.querySelector('.restart').firstElementChild;
+//--> Selects the button for a new game from the Modal
+const playAgain = document.getElementById('new-game');
+
+//--> ***QUESTION: Previously I declare my variables before each function declaration, as needed, would be that ok, or better like this?
 
 //--> Shuffle all the cards and display'em 
 let randomDisplay;
@@ -11,7 +38,6 @@ let randomDisplay;
         element.classList.remove('open', 'show', 'match');
     });
 })();
-
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -28,17 +54,12 @@ function shuffle(array) {
     return array;
 }
 
- 
-let selectedCards = [];  
-let matchedCardsLst = [];   
-let countClickedCards = 0;
-
 //--> Add event listeners to each card's loop
 for (let card of allCards) {
     card.addEventListener('click', showCard)
 }
 
-// --> Show cards function 
+// --> Show cards 
 function showCard() {
     let thisItem = this;
     if (thisItem.classList.contains('show')) {
@@ -51,7 +72,7 @@ function showCard() {
     }
 }
 
-//--> Match cards function
+//--> Match cards 
 function lookForMatch() {
     if (selectedCards.length === 2) {
         countMoves();
@@ -74,9 +95,7 @@ function lookForMatch() {
     }        
 }
 
-//--> Function: count moves made by user
-let moves = document.querySelector('.moves');
-let totalMoves = 0;
+//--> Count moves made by user
 function countMoves() {
     totalMoves++;
     moves.textContent = totalMoves;
@@ -86,11 +105,7 @@ function countMoves() {
     performanceRating();
 } 
 
-//--> Function: sets a timer for the game
-const timerElmnt = document.querySelector('.timer');
-let timePeriod;
-let seconds = 0;
-let minutes = 0;
+//--> Sets a timer for the game
 function startTimer() {
     timePeriod = setInterval(function () {
         timerElmnt.innerHTML = `${minutes} minute(s) ${seconds} seconds`; 
@@ -102,8 +117,7 @@ function startTimer() {
     }, 1000);
 }
 
-//--> Function: rates the performance of player
-const allStars = Array.from(document.querySelectorAll('.fa-star'));
+//--> Rates the performance of player
 function performanceRating() {
     if (totalMoves > 9 && totalMoves < 14 ) {
         allStars[2].classList.add('star-down');
@@ -112,7 +126,7 @@ function performanceRating() {
     }
 }
 
-//--> Game completed successfully function for modal
+//--> Modal when game has been completed successfully
 function completedGame() {
     const finalRating = document.querySelector('.stars').innerHTML;
     if (matchedCardsLst.length === 8) {
@@ -124,14 +138,12 @@ function completedGame() {
     }
 }
 
-//--> Close the modal function
-const close = document.querySelector('.close');
+//--> Close the modal 
 close.addEventListener('click', function () {
     document.querySelector('.end-modal').style.display = 'none';   
 });
 
 //--> Restart game
-const restartBtn = document.querySelector('.restart').firstElementChild;
 function restartGame() {
     clearInterval(timePeriod);
     totalMoves = 0;
@@ -144,11 +156,9 @@ function restartGame() {
     allStars[1].classList.remove('star-down');
     randomDisplay();
 }
-
 restartBtn.addEventListener('click', restartGame);
 
 // --> Function: after successfully finished, play again
-const playAgain = document.getElementById('new-game');
 playAgain.addEventListener('click', function () {
     restartGame();
     document.querySelector('.end-modal').style.display = 'none';
